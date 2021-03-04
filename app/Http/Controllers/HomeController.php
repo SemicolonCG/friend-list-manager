@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Friends;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         $this->middleware(['auth','verified']);
     }
-  
+
     /**
      * Show the application dashboard.
      *
@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+         $data = Friends::paginate(10);
+          return view('home',compact('data'));
+
     }
 }
